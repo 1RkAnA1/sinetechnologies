@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINE - IT Consulting for Financial Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-nav svg {
+            width: 60px;
+            height: 30px;
+        }
+
+        .logo-nav-path {
+            stroke: #00d4ff;
+            stroke-width: 3;
+            fill: none;
+            filter: drop-shadow(0 0 5px #00d4ff);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            background: linear-gradient(45deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #fff;
+            padding: 0.7rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #00d4ff;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 15s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 3s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 6s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 9s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 12s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 2s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 8s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 11s; }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #00d4ff;
+            padding: 0.7rem 1.8rem;
+            border: 2px solid #00d4ff;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .secondary-btn:hover {
+            background: #00d4ff;
+            color: #0a0a0a;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #fff;
+            padding: 4rem 2rem;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .stat-item p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 6rem 2rem;
+            background: #fff;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00d4ff20, #0099cc20);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            border: 3px solid #00d4ff;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            position: relative;
+        }
+
+        .tech-stack .section-header h2 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .tech-stack .section-header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-category {
+            margin-bottom: 4rem;
+        }
+
+        .tech-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .tech-category h3 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tech-badge {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .tech-badge:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            filter: grayscale(30%);
+        }
+
+        .tech-badge:hover .tech-icon {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge span {
+            display: block;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .cta-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #fff;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #00d4ff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-nav">
+                <svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid meet">
+                    <path class="logo-nav-path" d="M0,15 Q7.5,5 15,15 T30,15 T45,15 T60,15" />
+                </svg>
+                <span class="logo-text">SINE</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-btn">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Enterprise IT & AI Solutions for <span>Financial Services</span></h1>
+            <p>Transform your financial institution with cutting-edge technology consulting. We deliver secure, scalable IT infrastructure, custom software, and AI/ML solutions tailored to the unique demands of the financial sector.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-btn">Schedule Consultation</a>
+                <a href="#services" class="secondary-btn">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>IT Projects Delivered</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Financial Clients</p>
+            </div>
+            <div class="stat-item">
+                <h3>20+</h3>
+                <p>Years of IT Expertise</p>
+            </div>
+            <div class="stat-item">
+                <h3>99.9%</h3>
+                <p>System Uptime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our IT Consulting Services</h2>
+            <p>Comprehensive technology solutions designed specifically for banks, investment firms, and financial institutions</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>AI & Machine Learning</h3>
+                <p>Predictive analytics, fraud detection, algorithmic trading, and intelligent automation powered by TensorFlow, PyTorch, and custom ML models.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>Cloud Infrastructure</h3>
+                <p>Migrate and manage your financial systems on secure cloud platforms with enterprise-grade scalability, compliance, and disaster recovery.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔐</div>
+                <h3>Cybersecurity</h3>
+                <p>Comprehensive security solutions including AI-powered threat detection, penetration testing, and compliance with PCI-DSS and SOC 2.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Custom Software Development</h3>
+                <p>Bespoke trading platforms, mobile banking apps, and financial management systems built with modern frameworks and APIs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Data Analytics & BI</h3>
+                <p>Advanced analytics platforms, real-time reporting dashboards, and AI-powered insights to drive better business decisions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h3>Intelligent Automation</h3>
+                <p>AI chatbots, RPA solutions, and NLP-powered document processing to streamline operations and enhance customer experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI/ML Technologies Section -->
+    <section class="services" style="background: #fff;">
+        <div class="section-header">
+            <h2>AI & Machine Learning Capabilities</h2>
+            <p>Harness the power of artificial intelligence to gain competitive advantage and drive innovation</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Fraud Detection</h3>
+                <p>Real-time anomaly detection using neural networks and ensemble methods to identify suspicious transactions and prevent financial crimes.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Predictive Analytics</h3>
+                <p>Time-series forecasting, customer churn prediction, and market trend analysis using LSTM, ARIMA, and gradient boosting models.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤝</div>
+                <h3>Credit Risk Modeling</h3>
+                <p>Advanced ML models for credit scoring, default prediction, and portfolio risk assessment with explainable AI capabilities.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Algorithmic Trading</h3>
+                <p>Deep reinforcement learning and quantitative strategies for automated trading systems with backtesting and optimization.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🗣️</div>
+                <h3>NLP & Sentiment Analysis</h3>
+                <p>Process financial documents, analyze market sentiment from news, and extract insights using transformer models like BERT and GPT.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👤</div>
+                <h3>Customer Personalization</h3>
+                <p>Recommendation engines, next-best-action models, and customer segmentation using collaborative filtering and clustering algorithms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us" id="why-us">
+        <div class="section-header">
+            <h2>Why Choose SINE</h2>
+            <p>We combine deep financial industry knowledge with world-class technology expertise</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🧠</div>
+                <h3>AI/ML Expertise</h3>
+                <p>Deep learning models for fraud detection, risk assessment, customer segmentation, and predictive analytics</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏦</div>
+                <h3>Financial Domain Expertise</h3>
+                <p>Specialized knowledge of banking systems, trading platforms, and regulatory compliance requirements</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🛡️</div>
+                <h3>Security First</h3>
+                <p>Zero-trust architecture, end-to-end encryption, and compliance with SOC 2, PCI-DSS, and GDPR standards</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Cutting-Edge Tech Stack</h3>
+                <p>Python, TensorFlow, AWS SageMaker, Azure ML, Kubernetes, and modern cloud-native architectures</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
+        <div class="section-header">
+            <h2>Our Technology Stack</h2>
+            <p>Industry-leading tools and frameworks powering enterprise-grade solutions</p>
+        </div>
+        <div class="tech-container">
+            <div class="tech-category">
+                <h3>AI & Machine Learning</h3>
+                <div class="tech-grid">
+                    <div class="tech-badge">
+                        <div class="tech-icon">🧠</div>
+                        <span>TensorFlow</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔥</div>
+                        <span>PyTorch</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">📊</div>
+                        <span>Scikit-learn</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🐍</div>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🤖</div>
+                        <span>Keras</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">📈</div>
+                        <span>XGBoost</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Cloud & Infrastructure</h3>
+                <div class="tech-grid">
+                    <div class="tech-badge">
+                        <div class="tech-icon">☁️</div>
+                        <span>AWS</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🌐</div>
+                        <span>Azure</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔵</div>
+                        <span>Google Cloud</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">⚓</div>
+                        <span>Kubernetes</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🐳</div>
+                        <span>Docker</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔧</div>
+                        <span>Terraform</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Data & Analytics</h3>
+                <div class="tech-grid">
+                    <div class="tech-badge">
+                        <div class="tech-icon">⚡</div>
+                        <span>Apache Spark</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🌊</div>
+                        <span>Kafka</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">📊</div>
+                        <span>Tableau</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">💾</div>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔴</div>
+                        <span>Redis</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">📉</div>
+                        <span>Power BI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Development & DevOps</h3>
+                <div class="tech-grid">
+                    <div class="tech-badge">
+                        <div class="tech-icon">⚛️</div>
+                        <span>React</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🟢</div>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">☕</div>
+                        <span>Java/Spring</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔷</div>
+                        <span>.NET</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🔄</div>
+                        <span>Jenkins</span>
+                    </div>
+                    <div class="tech-badge">
+                        <div class="tech-icon">🦊</div>
+                        <span>GitLab CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <h2>Ready to Modernize Your Financial Technology?</h2>
+        <p>Schedule a consultation with our IT experts and discover how SINE can transform your institution with cutting-edge technology solutions.</p>
+        
+        <!-- Contact Form -->
+        <div class="contact-form-container">
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+                <input type="hidden" name="form-name" value="contact">
+                <p style="display: none;">
+                    <label>Don't fill this out: <input name="bot-field"></label>
+                </p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email Address *" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" name="company" placeholder="Company Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Phone Number">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <select name="service" required>
+                        <option value="">Select Service of Interest *</option>
+                        <option value="ai-ml">AI & Machine Learning</option>
+                        <option value="cloud">Cloud Infrastructure</option>
+                        <option value="cybersecurity">Cybersecurity</option>
+                        <option value="software-dev">Custom Software Development</option>
+                        <option value="data-analytics">Data Analytics & BI</option>
+                        <option value="automation">Intelligent Automation</option>
+                        <option value="consultation">General Consultation</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Tell us about your project..."></textarea>
+                </div>
+                
+                <button type="submit" class="cta-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SINE IT Consulting</h3>
+                <p>Advanced Technology Solutions for Financial Services</p>
+                <p style="margin-top: 1rem;">Empowering financial institutions through innovative IT consulting and custom software development.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#services">Services</a>
+                <a href="#why-us">Why Choose Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: contact@sine.com</p>
+                <p>Phone: (555) 123-4567</p>
+                <p>Address: 123 Financial District<br>New York, NY 10004</p>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SINE IT Consulting. All rights reserved. | Trusted technology partner for financial institutions worldwide.</p>
+        </div>
+    </footer>
+</body>
+</html>
