@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SINE - IT Consulting for Financial Services</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -437,6 +443,179 @@
             font-size: 1rem;
         }
 
+        /* Case Studies Grid */
+        .case-studies-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .case-study-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+
+        .case-study-header {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .case-study-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .case-study-header .industry {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .case-study-body {
+            padding: 2rem;
+        }
+
+        .case-study-challenge {
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-challenge h4 {
+            color: #1a1a2e;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .case-study-challenge p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .case-study-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-item .number {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #00d4ff;
+            display: block;
+        }
+
+        .result-item .label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .blog-category {
+            background: #00d4ff;
+            color: #fff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .blog-card h3 {
+            font-size: 1.4rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .blog-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-read-more {
+            color: #00d4ff;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .blog-read-more:hover {
+            gap: 1rem;
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 6rem 2rem;
@@ -621,7 +800,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
-                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <a href="#contact" class="cta-btn">Get Started</a>
@@ -642,8 +824,8 @@
             <div class="particle"></div>
         </div>
         <div class="hero-content">
-            <h1>Enterprise IT & AI Solutions for <span>Financial Services</span></h1>
-            <p>Transform your financial institution with cutting-edge technology consulting. We deliver secure, scalable IT infrastructure, custom software, and AI/ML solutions tailored to the unique demands of the financial sector.</p>
+            <h1>Enterprise IT & AI Solutions for <span>Modern Business</span></h1>
+            <p>Transform your organization with cutting-edge technology consulting. We deliver secure, scalable IT infrastructure, custom software, and AI/ML solutions tailored to drive innovation across industries.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="cta-btn">Schedule Consultation</a>
                 <a href="#services" class="secondary-btn">Explore Services</a>
@@ -667,9 +849,68 @@
                 <p>Years of IT Expertise</p>
             </div>
             <div class="stat-item">
-                <h3>99.9%</h3>
-                <p>System Uptime</p>
+                <h3 id="visitorCount">---</h3>
+                <p>Website Visitors</p>
             </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="services" style="background: #fff;" id="testimonials">
+        <div class="section-header">
+            <h2>Client Testimonials</h2>
+            <p>Hear what our clients say about working with SINE</p>
+        </div>
+        <div id="testimonialsContainer" class="services-grid">
+            <!-- Testimonials will be loaded from Firebase -->
+            <div class="service-card" style="text-align: center;">
+                <p style="color: #666;">Loading testimonials...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="services" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);" id="case-studies">
+        <div class="section-header">
+            <h2>Case Studies</h2>
+            <p>Real-world success stories from our client engagements</p>
+        </div>
+        <div id="caseStudiesContainer" class="case-studies-grid">
+            <!-- Case studies will be loaded from Firebase -->
+            <div class="case-study-card" style="text-align: center;">
+                <p style="color: #666;">Loading case studies...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Portfolio Section -->
+    <section class="services" style="background: #fff;" id="projects">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>Explore our portfolio of innovative technology solutions</p>
+        </div>
+        <div id="projectsContainer" class="services-grid">
+            <!-- Projects will be loaded from Firebase -->
+            <div class="service-card" style="text-align: center;">
+                <p style="color: #666;">Loading projects...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="services" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);" id="blog">
+        <div class="section-header">
+            <h2>Latest Insights</h2>
+            <p>Expert perspectives on technology trends and innovations</p>
+        </div>
+        <div id="blogContainer" class="blog-grid">
+            <!-- Blog posts will be loaded from Firebase -->
+            <div class="blog-card" style="text-align: center;">
+                <p style="color: #666;">Loading blog posts...</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="#blog" class="secondary-btn" style="display: inline-block;">View All Posts</a>
         </div>
     </section>
 
@@ -677,7 +918,7 @@
     <section class="services" id="services">
         <div class="section-header">
             <h2>Our IT Consulting Services</h2>
-            <p>Comprehensive technology solutions designed specifically for banks, investment firms, and financial institutions</p>
+            <p>Comprehensive technology solutions designed for enterprise organizations across all industries</p>
         </div>
         <div class="services-grid">
             <div class="service-card">
@@ -688,7 +929,7 @@
             <div class="service-card">
                 <div class="service-icon">☁️</div>
                 <h3>Cloud Infrastructure</h3>
-                <p>Migrate and manage your financial systems on secure cloud platforms with enterprise-grade scalability, compliance, and disaster recovery.</p>
+                <p>Migrate and manage your systems on secure cloud platforms with enterprise-grade scalability, compliance, and disaster recovery capabilities.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🔐</div>
@@ -698,7 +939,7 @@
             <div class="service-card">
                 <div class="service-icon">💻</div>
                 <h3>Custom Software Development</h3>
-                <p>Bespoke trading platforms, mobile banking apps, and financial management systems built with modern frameworks and APIs.</p>
+                <p>Bespoke enterprise applications, web platforms, mobile apps, and business management systems built with modern frameworks and APIs.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">📊</div>
@@ -722,28 +963,28 @@
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">🎯</div>
-                <h3>Fraud Detection</h3>
-                <p>Real-time anomaly detection using neural networks and ensemble methods to identify suspicious transactions and prevent financial crimes.</p>
+                <h3>Fraud Detection & Security</h3>
+                <p>Real-time anomaly detection using neural networks and ensemble methods to identify threats, prevent fraud, and protect your business.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">📈</div>
                 <h3>Predictive Analytics</h3>
-                <p>Time-series forecasting, customer churn prediction, and market trend analysis using LSTM, ARIMA, and gradient boosting models.</p>
+                <p>Time-series forecasting, customer churn prediction, demand planning, and trend analysis using advanced ML models for data-driven decisions.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🤝</div>
-                <h3>Credit Risk Modeling</h3>
-                <p>Advanced ML models for credit scoring, default prediction, and portfolio risk assessment with explainable AI capabilities.</p>
+                <h3>Risk & Compliance Management</h3>
+                <p>Advanced ML models for risk scoring, regulatory compliance automation, and decision support with explainable AI capabilities.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">💰</div>
-                <h3>Algorithmic Trading</h3>
-                <p>Deep reinforcement learning and quantitative strategies for automated trading systems with backtesting and optimization.</p>
+                <h3>Process Optimization</h3>
+                <p>Deep reinforcement learning and optimization algorithms to automate workflows, reduce costs, and improve operational efficiency.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🗣️</div>
-                <h3>NLP & Sentiment Analysis</h3>
-                <p>Process financial documents, analyze market sentiment from news, and extract insights using transformer models like BERT and GPT.</p>
+                <h3>NLP & Document Processing</h3>
+                <p>Process documents, automate data extraction, analyze sentiment, and gain insights using transformer models like BERT and GPT.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">👤</div>
@@ -763,17 +1004,17 @@
             <div class="feature-item">
                 <div class="feature-icon">🧠</div>
                 <h3>AI/ML Expertise</h3>
-                <p>Deep learning models for fraud detection, risk assessment, customer segmentation, and predictive analytics</p>
+                <p>Deep learning models for fraud detection, risk assessment, customer insights, and intelligent automation across industries</p>
             </div>
             <div class="feature-item">
-                <div class="feature-icon">🏦</div>
-                <h3>Financial Domain Expertise</h3>
-                <p>Specialized knowledge of banking systems, trading platforms, and regulatory compliance requirements</p>
+                <div class="feature-icon">🏢</div>
+                <h3>Industry Experience</h3>
+                <p>Proven track record across finance, healthcare, retail, manufacturing, and technology sectors with specialized knowledge</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">🛡️</div>
                 <h3>Security First</h3>
-                <p>Zero-trust architecture, end-to-end encryption, and compliance with SOC 2, PCI-DSS, and GDPR standards</p>
+                <p>Zero-trust architecture, end-to-end encryption, and compliance with SOC 2, HIPAA, PCI-DSS, and GDPR standards</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">⚡</div>
@@ -914,16 +1155,14 @@
 
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
-        <h2>Ready to Modernize Your Financial Technology?</h2>
-        <p>Schedule a consultation with our IT experts and discover how SINE can transform your institution with cutting-edge technology solutions.</p>
+        <h2>Ready to Transform Your Business with Technology?</h2>
+        <p>Schedule a consultation with our IT experts and discover how SINE can help your organization innovate and scale with cutting-edge solutions.</p>
         
         <!-- Contact Form -->
         <div class="contact-form-container">
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
-                <input type="hidden" name="form-name" value="contact">
-                <p style="display: none;">
-                    <label>Don't fill this out: <input name="bot-field"></label>
-                </p>
+            <form name="contact" method="POST" action="https://formspree.io/f/xdkyokgk" class="contact-form">
+                <input type="hidden" name="_subject" value="New contact from SINE website">
+                <input type="hidden" name="_cc" value="rkanarski@gmail.com">
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -952,6 +1191,7 @@
                         <option value="software-dev">Custom Software Development</option>
                         <option value="data-analytics">Data Analytics & BI</option>
                         <option value="automation">Intelligent Automation</option>
+                        <option value="process-optimization">Process Optimization</option>
                         <option value="consultation">General Consultation</option>
                     </select>
                 </div>
@@ -970,8 +1210,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>SINE IT Consulting</h3>
-                <p>Advanced Technology Solutions for Financial Services</p>
-                <p style="margin-top: 1rem;">Empowering financial institutions through innovative IT consulting and custom software development.</p>
+                <p>Advanced Technology Solutions for Modern Business</p>
+                <p style="margin-top: 1rem;">Empowering organizations through innovative IT consulting, AI/ML, and custom software development.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
@@ -994,8 +1234,325 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 SINE IT Consulting. All rights reserved. | Trusted technology partner for financial institutions worldwide.</p>
+            <p>&copy; 2025 SINE IT Consulting. All rights reserved. | Trusted technology partner for enterprise organizations worldwide.</p>
         </div>
     </footer>
+
+    <!-- Firebase Initialization and Functionality -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMy9u8a9NfuVb5CKwpRXI9hXY34Cp_ITQ",
+            authDomain: "sine-website.firebaseapp.com",
+            databaseURL: "https://sine-website-default-rtdb.firebaseio.com",
+            projectId: "sine-website",
+            storageBucket: "sine-website.firebasestorage.app",
+            messagingSenderId: "601221519922",
+            appId: "1:601221519922:web:1ef6529e0b9a8140037a2b",
+            measurementId: "G-GDJZZMPZ7R"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+
+        // Track page view
+        analytics.logEvent('page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+
+        // 1. VISITOR ANALYTICS - Track and Display Visitor Count
+        async function trackVisitor() {
+            try {
+                const visitorRef = db.collection('analytics').doc('visitors');
+                const visitorDoc = await visitorRef.get();
+                
+                if (visitorDoc.exists) {
+                    const currentCount = visitorDoc.data().count || 0;
+                    await visitorRef.update({
+                        count: currentCount + 1,
+                        lastVisit: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    document.getElementById('visitorCount').textContent = (currentCount + 1).toLocaleString();
+                } else {
+                    await visitorRef.set({
+                        count: 1,
+                        lastVisit: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    document.getElementById('visitorCount').textContent = '1';
+                }
+            } catch (error) {
+                console.error('Error tracking visitor:', error);
+                document.getElementById('visitorCount').textContent = '1000+';
+            }
+        }
+
+        // 2. LOAD TESTIMONIALS from Firebase
+        async function loadTestimonials() {
+            try {
+                const testimonialsSnapshot = await db.collection('testimonials')
+                    .orderBy('createdAt', 'desc')
+                    .limit(6)
+                    .get();
+
+                const container = document.getElementById('testimonialsContainer');
+                
+                if (testimonialsSnapshot.empty) {
+                    container.innerHTML = `
+                        <div class="service-card" style="grid-column: 1 / -1; text-align: center;">
+                            <p style="color: #666; font-size: 1.1rem;">
+                                No testimonials yet. Add testimonials in Firebase Console:<br>
+                                <strong>Firestore Database → testimonials collection</strong>
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+                testimonialsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const testimonialCard = `
+                        <div class="service-card">
+                            <div style="margin-bottom: 1rem;">
+                                <div style="color: #00d4ff; font-size: 2rem; margin-bottom: 0.5rem;">⭐⭐⭐⭐⭐</div>
+                            </div>
+                            <p style="font-style: italic; color: #666; margin-bottom: 1.5rem; line-height: 1.8;">
+                                "${data.text}"
+                            </p>
+                            <h4 style="color: #1a1a2e; margin-bottom: 0.3rem;">${data.name}</h4>
+                            <p style="color: #00d4ff; font-weight: 600; font-size: 0.9rem;">${data.company}</p>
+                            ${data.position ? `<p style="color: #999; font-size: 0.85rem;">${data.position}</p>` : ''}
+                        </div>
+                    `;
+                    container.innerHTML += testimonialCard;
+                });
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+            }
+        }
+
+        // 3. LOAD CASE STUDIES from Firebase
+        async function loadCaseStudies() {
+            try {
+                const caseStudiesSnapshot = await db.collection('caseStudies')
+                    .orderBy('createdAt', 'desc')
+                    .limit(6)
+                    .get();
+
+                const container = document.getElementById('caseStudiesContainer');
+                
+                if (caseStudiesSnapshot.empty) {
+                    container.innerHTML = `
+                        <div class="case-study-card" style="grid-column: 1 / -1;">
+                            <div class="case-study-body" style="text-align: center; padding: 3rem;">
+                                <p style="color: #666; font-size: 1.1rem;">
+                                    No case studies yet. Add case studies in Firebase Console:<br>
+                                    <strong>Firestore Database → caseStudies collection</strong>
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+                caseStudiesSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const resultsHTML = data.results ? data.results.map(result => `
+                        <div class="result-item">
+                            <span class="number">${result.value}</span>
+                            <span class="label">${result.label}</span>
+                        </div>
+                    `).join('') : '';
+
+                    const caseStudyCard = `
+                        <div class="case-study-card">
+                            <div class="case-study-header">
+                                <div class="industry">${data.industry || 'Technology'}</div>
+                                <h3>${data.title}</h3>
+                            </div>
+                            <div class="case-study-body">
+                                <div class="case-study-challenge">
+                                    <h4>Challenge</h4>
+                                    <p>${data.challenge}</p>
+                                </div>
+                                <div class="case-study-challenge">
+                                    <h4>Solution</h4>
+                                    <p>${data.solution}</p>
+                                </div>
+                                ${resultsHTML ? `<div class="case-study-results">${resultsHTML}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += caseStudyCard;
+                });
+            } catch (error) {
+                console.error('Error loading case studies:', error);
+            }
+        }
+
+        // 4. LOAD PROJECTS from Firebase
+        async function loadProjects() {
+            try {
+                const projectsSnapshot = await db.collection('projects')
+                    .orderBy('createdAt', 'desc')
+                    .limit(6)
+                    .get();
+
+                const container = document.getElementById('projectsContainer');
+                
+                if (projectsSnapshot.empty) {
+                    container.innerHTML = `
+                        <div class="service-card" style="grid-column: 1 / -1; text-align: center;">
+                            <p style="color: #666; font-size: 1.1rem;">
+                                No projects yet. Add projects in Firebase Console:<br>
+                                <strong>Firestore Database → projects collection</strong>
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+                projectsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const technologiesHTML = data.technologies ? 
+                        data.technologies.map(tech => `<span style="background: rgba(0, 212, 255, 0.1); color: #00d4ff; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; margin-right: 0.5rem; display: inline-block; margin-bottom: 0.5rem;">${tech}</span>`).join('') : '';
+
+                    const projectCard = `
+                        <div class="service-card">
+                            <div class="service-icon">${data.icon || '🚀'}</div>
+                            <h3>${data.title}</h3>
+                            <p style="color: #00d4ff; font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem;">${data.client || 'Enterprise Client'}</p>
+                            <p>${data.description}</p>
+                            ${technologiesHTML ? `<div style="margin-top: 1.5rem;">${technologiesHTML}</div>` : ''}
+                        </div>
+                    `;
+                    container.innerHTML += projectCard;
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+            }
+        }
+
+        // 5. LOAD BLOG POSTS from Firebase
+        async function loadBlogPosts() {
+            try {
+                const blogSnapshot = await db.collection('blog')
+                    .orderBy('publishedAt', 'desc')
+                    .limit(3)
+                    .get();
+
+                const container = document.getElementById('blogContainer');
+                
+                if (blogSnapshot.empty) {
+                    container.innerHTML = `
+                        <div class="blog-card" style="grid-column: 1 / -1;">
+                            <div class="blog-content" style="text-align: center; padding: 3rem;">
+                                <p style="color: #666; font-size: 1.1rem;">
+                                    No blog posts yet. Add blog posts in Firebase Console:<br>
+                                    <strong>Firestore Database → blog collection</strong>
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+                blogSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const publishDate = data.publishedAt ? new Date(data.publishedAt.toDate()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Recent';
+
+                    const blogCard = `
+                        <div class="blog-card">
+                            <div class="blog-image">${data.icon || '📝'}</div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">${data.category || 'Technology'}</span>
+                                    <span>${publishDate}</span>
+                                </div>
+                                <h3>${data.title}</h3>
+                                <p>${data.excerpt || data.content?.substring(0, 150) + '...' || ''}</p>
+                                <a href="#blog" class="blog-read-more">Read More →</a>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += blogCard;
+                });
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+            }
+        }
+
+        // 6. HANDLE CONTACT FORM SUBMISSION
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact-form');
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                // Get form data
+                const formData = {
+                    name: form.querySelector('input[name="name"]').value,
+                    email: form.querySelector('input[name="email"]').value,
+                    company: form.querySelector('input[name="company"]').value,
+                    phone: form.querySelector('input[name="phone"]').value,
+                    service: form.querySelector('select[name="service"]').value,
+                    message: form.querySelector('textarea[name="message"]').value,
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    userAgent: navigator.userAgent,
+                    pageUrl: window.location.href
+                };
+
+                try {
+                    // Save to Firebase
+                    await db.collection('contactSubmissions').add(formData);
+                    
+                    // Also send via Formspree
+                    const formspreeData = new FormData(form);
+                    await fetch(form.action, {
+                        method: 'POST',
+                        body: formspreeData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    // Success message
+                    alert('Thank you! Your message has been sent successfully. We\'ll get back to you soon!');
+                    form.reset();
+                    
+                    // Track conversion
+                    analytics.logEvent('form_submission', {
+                        form_name: 'contact',
+                        service: formData.service
+                    });
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('There was an error sending your message. Please try again or email us directly at rkanarski@gmail.com');
+                }
+
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+
+            // Initialize features
+            trackVisitor();
+            loadTestimonials();
+            loadCaseStudies();
+            loadProjects();
+            loadBlogPosts();
+        });
+    </script>
 </body>
 </html>
